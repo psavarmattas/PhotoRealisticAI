@@ -3,3 +3,5 @@ ckpt/discriminator/
 ckpt/generator/
 dataset/celebA_dataset/
 .DS_Store
+models/__pycache__
+utils/__pycache__
