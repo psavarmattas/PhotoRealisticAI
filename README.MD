@@ -9,26 +9,16 @@ Due to resource constraints, we will be focusing on generating images at a lower
     
 ## Project Instructions
 1. Clone the repository:
-
 `git clone https://github.com/psavarmattas/PhotorealisticAI.git`
 
-2. cd into the repository:
+2. cd into the repository: `cd ./PhotorealisticAI`
 
-`cd ./PhotorealisticAI`
+3. Create a new environment with python 3.11 and activate it: `conda create --name PhotoRealisticAI python=3.11 && conda activate PhotoRealisticAI`
 
-3. Install the required packages:
+4. Install the required packages: `pip install -r requirements.txt` or `conda install --file requirements.txt`
 
-`pip install -r requirements.txt` 
+<I><B>Note:</B> The above requirements contain a few MacOS specific requirements please make sure not to install those if you are not on MacOS & remove them from the `requirements.txt` as without removing it from the file the main file will not run.</I>
 
-<b>OR</b> 
-
-`conda env create -f environment.yml`
-
-<I><B>Note:</B> The above requirements contain a few MacOS specific requirements please make sure not to install those if you are not on MacOS.</I>
-
-4. Activate the environment:
-
-`conda activate PhotoRealisticAI`
 
 5. Run the `main.py`!
 
