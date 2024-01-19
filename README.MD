@@ -40,7 +40,7 @@ First of all, let's import necessary libraries:
 
 ### Step 2 | Loading and Preprocessing the Dataset
 
-The first step in our pipeline involves preparing our data for the DCGAN model. For this project, we're using a subset of the CelebFaces Attributes (CelebA) Dataset, which is available on [Kaggle](https://www.kaggle.com/datasets/farzadnekouei/50k-celebrity-faces-image-dataset).
+The first step in our pipeline involves preparing our data for the DCGAN model. For this project, we're using  the CelebFaces Attributes (CelebA) Dataset, which is available on [their website](https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html).
 
 To ensure our model receives optimal data, we perform the following preprocessing steps on each image:
 
