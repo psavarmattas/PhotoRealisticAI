@@ -3,6 +3,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Conv2D, Conv2DTranspose, LeakyReLU, Dropout, Flatten
 
 def build_discriminator(image_shape=(128, 128, 3)):
+
     """
     Build and compile a discriminator model for a GAN (Generative Adversarial Network).
 
