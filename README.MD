@@ -5,7 +5,7 @@
 ## Project Overview
 In this project, I have defined and trained a DCGAN on a dataset of faces. My goal was to get a generator network to generate new images of faces that look as realistic as possible! At the end of the project, I was able to visualize the results of my trained Generator to see how it performs; my generated samples look like fairly realistic faces with small amounts of noise.
 
-Due to resource constraints, we will be focusing on generating images at a lower resolution of 128x128 pixels. In this endeavor, we're utilizing a subset of the CelebFaces Attributes (CelebA) Dataset, specifically the first 50,000 images. This subset is conveniently available on Kaggle. Our chosen method for image synthesis is the Deep Convolutional Generative Adversarial Networks (DCGANs). Prior to training this DCGAN model, our dataset will undergo a rigorous preprocessing phase to ensure optimal results. The ultimate objective is to train our DCGAN to synthesize new, lifelike faces that evoke the essence of the celebrities in our training set, albeit in a fabricated manner.
+Due to resource constraints, we will be focusing on generating images at a lower resolution of 128x128 pixels. In this endeavor, we're utilizing the CelebFaces Attributes (CelebA) Dataset. This dataset is conveniently available on [their website](https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html). Our chosen method for image synthesis is the Deep Convolutional Generative Adversarial Networks (DCGANs). Prior to training this DCGAN model, our dataset will undergo a rigorous preprocessing phase to ensure optimal results. The ultimate objective is to train our DCGAN to synthesize new, lifelike faces that evoke the essence of the celebrities in our training set, albeit in a fabricated manner.
     
 ## Project Instructions
 1. Clone the repository:
@@ -13,14 +13,15 @@ Due to resource constraints, we will be focusing on generating images at a lower
 
 2. cd into the repository: `cd ./PhotorealisticAI`
 
-3. Create a new environment with python 3.11 and activate it: `conda create --name PhotoRealisticAI python=3.11 && conda activate PhotoRealisticAI`
+3. Download the dataset & unzip all the images in `dataset/celebA_dataset`
 
-4. Install the required packages: `pip install -r requirements.txt` or `conda install --file requirements.txt`
+4. Create a new environment with python 3.11 and activate it: `conda create --name PhotoRealisticAI python=3.11 && conda activate PhotoRealisticAI`
+
+5. Install the required packages: `pip install -r requirements.txt` or `conda install --file requirements.txt`
 
 <I><B>Note:</B> The above requirements contain a few MacOS specific requirements please make sure not to install those if you are not on MacOS & remove them from the `requirements.txt` as without removing it from the file the main file will not run.</I>
 
-
-5. Run the `main.py`!
+6. Run the command: `python main.py`
 
 ## Steps of the algorithm's working
 
@@ -91,3 +92,10 @@ The above process is iteratively executed until all epochs are finalized. The pl
 This combined training approach allows the Generator and Discriminator to learn together. The Discriminator improves at distinguishing fake images, and the Generator becomes better at fooling the Discriminator.
 
 <I><B>Note:</B> A higher number of epochs could potentially lead to even more realistic and refined results.</I>
+
+## [License](https://github.com/psavarmattas/PhotoRealisticAI/blob/main/LICENSE.MD)
+
+Please make sure you read the license before using the code.
+
+## Attribution for the dataset
+The dataset is provided by `title = Deep Learning Face Attributes in the Wild author = Liu, Ziwei and Luo, Ping and Wang, Xiaogang and Tang, Xiaoou, booktitle = Proceedings of International Conference on Computer Vision (ICCV), month = December, year = 2015`
