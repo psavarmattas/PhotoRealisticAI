@@ -1,0 +1,5 @@
+.vscode/
+ckpt/discriminator/
+ckpt/generator/
+dataset/celebA_dataset/
+.DS_Store
