@@ -1,6 +1,6 @@
 from keras.optimizers import Adam
 from keras.models import Sequential
-from keras.layers import Dense, Conv2D, Conv2DTranspose, LeakyReLU, Dropout, Flatten
+from keras.layers import Dense, Conv2D, LeakyReLU, Dropout, Flatten
 
 def build_discriminator(image_shape=(128, 128, 3)):
 
