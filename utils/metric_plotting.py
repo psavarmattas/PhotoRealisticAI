@@ -100,3 +100,27 @@ def plot_training_metrics(discriminator_loss, discriminator_accuracy, generator_
     # Uncomment the line below if you want to display the plot
     # plt.show()
 
+def plot_fid_score(fid_history, epoch):
+    """
+    Plot FID score history over training iterations and save the plot.
+
+    Args:
+        fid_history (list): List of FID scores at different iterations.
+        epoch (int): The epoch number for which the FID is plotted.
+        out_dir (str): The directory to save the plot. Defaults to the current working directory.
+
+    Returns:
+        None
+    """
+    iterations = range(len(fid_history))
+    
+    # Create a plot with FID Score History
+    plt.figure(figsize=(12, 4))
+    plt.subplot(131)
+    plt.plot(iterations, fid_history, label='FID Score')
+    plt.title('FID at '+str(epoch))
+    plt.xlabel('Epochs')
+    plt.legend()
+    image_path = os.path.join(out_dir, 'FID_at-'+str(epoch)+'.png')
+    plt.savefig(fname=image_path)  # Save separately
+    plt.close()

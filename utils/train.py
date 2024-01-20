@@ -99,15 +99,6 @@ def train(generator_model, discriminator_model, gan_model, dataset, noise_dimens
             discriminator_loss_history.append(dsr_loss)
             discriminator_accuracy_history.append(100 * dsr_acc)
             generator_loss_history.append(gen_loss)
-            
-        if epoch % fid_frequency == 0:
-            real_images_fid, real_labels_fid = generate_real_samples(dataset, 1000)
-            generated_images_fid, generated_label_fid = generate_fake_samples(generator_model, noise_dimension, len(real_images_fid))
-            fid_value = calculate_fid(real_images_fid, generated_images_fid)
-            fid_history.append(fid_value)
-            print("====================================================================================================")
-            print(f"FID at Epoch {epoch+1}: {fid_value}")
-            print("====================================================================================================")
         
         # Log Epoch count
         logEpoch=f"{epoch+1}"
@@ -123,11 +114,6 @@ def train(generator_model, discriminator_model, gan_model, dataset, noise_dimens
         print("====================================================================================================")
         print(f"Epoch {epoch+1} took {int(hours):02}:{int(minutes):02}:{seconds:.2f}")
         print("====================================================================================================")
-        time.sleep(10)
-
-        # Cooldown after every 5 epochs for 5 minutes
-        if (epoch + 1) % 5 == 0:  # Cooldown after every 5 epochs
-            cooldown(cooldown_duration_minutes)
         
         # Display generated images at the specified frequency
         if epoch % display_frequency == 0:
@@ -143,6 +129,23 @@ def train(generator_model, discriminator_model, gan_model, dataset, noise_dimens
             discriminator_loss_history = []
             discriminator_accuracy_history = []
             generator_loss_history = []
+
+        if epoch % fid_frequency == 0:
+            real_images_fid, real_labels_fid = generate_real_samples(dataset, 1000)
+            generated_images_fid, generated_label_fid = generate_fake_samples(generator_model, noise_dimension, len(real_images_fid))
+            fid_value = calculate_fid(real_images_fid, generated_images_fid)
+            fid_history.append(fid_value)
+            print(f"FID at Epoch {epoch+1}: {fid_value}")
+            logText=f"FID at Epoch {epoch+1}: {fid_value}"
+            log_to_file(logText, 4)
+            plot_fid_score(fid_history, epoch+1)
+            print("====================================================================================================")
+
+        time.sleep(10)
+
+        # Cooldown after every 5 epochs for 5 minutes
+        if (epoch + 1) % 5 == 0:  # Cooldown after every 5 epochs
+            cooldown(cooldown_duration_minutes)
 
     saved_images_for_epochs = saved_images
 
