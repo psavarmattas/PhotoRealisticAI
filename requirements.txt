@@ -89,6 +89,8 @@ pyzmq
 requests
 requests-oauthlib
 rsa
+scikit-image
+scipy
 Send2Trash
 six
 sniffio
