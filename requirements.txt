@@ -101,8 +101,6 @@ tensorboard-data-server
 tensorflow
 tensorflow-estimator
 tensorflow-io-gcs-filesystem
-tensorflow-macos
-tensorflow-metal
 termcolor
 terminado
 tinycss2
