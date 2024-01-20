@@ -24,6 +24,7 @@ entrypoints
 exceptiongroup
 executing
 fastjsonschema
+Flask
 flatbuffers
 fonttools
 gast
