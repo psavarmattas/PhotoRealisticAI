@@ -100,11 +100,10 @@ def train(generator_model, discriminator_model, gan_model, dataset, noise_dimens
             discriminator_accuracy_history.append(100 * dsr_acc)
             generator_loss_history.append(gen_loss)
 
-            if (dsr_loss >= 10.0) | (gen_loss >= 10.0):
+            if (dsr_loss >= 15.0) | (gen_loss >= 15.0):
                 print("====================================================================================================")
                 print("Loss is too high! Training is stopped.")
-                print("\nNOTE: Please delete the last checkpoint file & write the name of the previous checkpoint .index \
-                        file to the checkpoint file in the generator & discriminator checkpoint folders.")
+                print("\nNOTE: Please delete the last checkpoint file & write the name of the previous checkpoint .index file to the checkpoint file in the generator & discriminator checkpoint folders.")
                 print("====================================================================================================")
                 sys.exit(1)
             else:
