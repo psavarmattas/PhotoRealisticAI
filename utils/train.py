@@ -4,6 +4,7 @@ from utils.visualization import *
 from utils.image_plotting import *
 from utils.metric_plotting import *
 from utils.calculate_fid import *
+from utils.cooldown_gpu import *
 import time
 
 def train(generator_model, discriminator_model, gan_model, dataset, noise_dimension,
@@ -49,6 +50,9 @@ def train(generator_model, discriminator_model, gan_model, dataset, noise_dimens
     
     # Calculate half the size of a batch
     half_batch_size   = int(batch_size / 2)
+    
+    # Setting cooldown time for GPU cooldown
+    cooldown_duration_minutes=5
     
     # Loop over all epochs
     for epoch in range(num_epochs):
@@ -121,6 +125,10 @@ def train(generator_model, discriminator_model, gan_model, dataset, noise_dimens
         print("====================================================================================================")
         time.sleep(10)
 
+        # Cooldown after every 5 epochs for 5 minutes
+        if (epoch + 1) % 5 == 0:  # Cooldown after every 5 epochs
+            cooldown(cooldown_duration_minutes)
+        
         # Display generated images at the specified frequency
         if epoch % display_frequency == 0:
             generated_images_for_epoch = generate_images(epoch+1, generator_model)
