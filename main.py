@@ -1,6 +1,7 @@
 from utils.check_dependencies import *
 from utils.check_tf import *
 from utils.train_load_finish import *
+from utils.file_operations import *
 
 def main():
 
@@ -19,6 +20,9 @@ def main():
 
     # Checking TensorFlow and its dependencies
     check_tf()
+    
+    # Making directories for everything
+    creating_dirs()
 
     # Asking the user if they want to train the model or load it.
     generator=train_or_load()
