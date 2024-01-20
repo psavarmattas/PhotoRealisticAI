@@ -20,11 +20,9 @@ def main():
     # Checking TensorFlow and its dependencies
     check_tf()
 
-    # Asking the user if they want to train the model or not.
-    print("====================================================================================================")
-    train_model = str(input("Do you want to train the model? (Y/N): "))
-    print("====================================================================================================")
-    train_or_load(train_model)
+    # Asking the user if they want to train the model or load it.
+    generator=train_or_load()
+    generateNewImageFromGAN(generator)
 
 if __name__ == "__main__":
     main()
