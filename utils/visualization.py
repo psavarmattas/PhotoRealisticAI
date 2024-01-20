@@ -1,5 +1,7 @@
 from utils.data_generation import *
 from matplotlib import pyplot as plt
+from PIL import Image
+import numpy as np
 
 def generate_images(epoch, generator, num_samples=6, noise_dim=100):
 
@@ -53,3 +55,29 @@ def generateNewImageFromGAN(generator):
     plt.imshow(generated_image[0])
     plt.axis('off')
     plt.show()
+    
+def generateNewImageFromAI(generator):
+
+    """
+    Generate a single image using the provided generator model.
+
+    Parameters:
+    - generator (tf.keras.Model): The generator model used to generate the image.
+
+    Returns:
+    - PIL.Image.Image: The generated image.
+    """
+
+    # Generate noise samples
+    noise_dim = 100
+    X_noise = generate_noise_samples(1, noise_dim)
+
+    # Use generator to create an image
+    generated_image = generator.predict(X_noise)
+    # Rescale pixel values to the range [0, 255]
+    generated_image = ((0.5 * generated_image + 0.5) * 255).astype(np.uint8)
+
+    # Convert NumPy array to PIL Image
+    generated_image_pil = Image.fromarray(generated_image[0])
+
+    return generated_image_pil
