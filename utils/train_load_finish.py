@@ -26,10 +26,10 @@ def train_or_load():
         
         if ((train_model=="Y") or (train_model=="y")):
             # Preprocessing and loading dataset
-            dataset = load_and_preprocess_dataset(load_limit=50000)
+            dataset = load_and_preprocess_dataset(load_limit=202599)
             # Set Arguments for training
             noise_dimension = 100
-            num_epochs=50
+            num_epochs=20
             batch_size=64
             display_frequency=1
             verbose=1
