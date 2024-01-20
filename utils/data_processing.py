@@ -28,7 +28,7 @@ def load_and_preprocess_image(image_path, target_size=(128,128)):
     image = (image / 127.5) - 1.0  # Normalize to the range [-1, 1]
     return image
 
-def load_and_preprocess_dataset():
+def load_and_preprocess_dataset(load_limit):
 
     """
     Load and preprocess a dataset of images.
@@ -48,7 +48,7 @@ def load_and_preprocess_dataset():
     image_paths = glob.glob(os.path.join(dataset_dir, '*.jpg'))
 
     # Limit the number of images
-    image_paths = image_paths[:50000]
+    image_paths = image_paths[:load_limit]
 
     # Create a TensorFlow dataset using tf.data
     image_paths_dataset = tf.data.Dataset.from_tensor_slices(image_paths)

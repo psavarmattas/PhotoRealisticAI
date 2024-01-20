@@ -15,7 +15,7 @@ def train_or_load():
     Perform training or loading of GAN models based on user input.
 
     Returns:
-        generator: The generator model if successfully loaded or trained, otherwise None.
+        tf.keras.Model or None: The generator model if successfully loaded or trained, otherwise None.
     """
 
     while True:
@@ -26,13 +26,14 @@ def train_or_load():
         
         if ((train_model=="Y") or (train_model=="y")):
             # Preprocessing and loading dataset
-            dataset = load_and_preprocess_dataset()
+            dataset = load_and_preprocess_dataset(load_limit=50000)
             # Set Arguments for training
             noise_dimension = 100
             num_epochs=50
             batch_size=64
             display_frequency=1
             verbose=1
+            fid_frequency=10
             saved_images = []
 
             # Build or restore discriminator model
@@ -51,7 +52,7 @@ def train_or_load():
             print("====================================================================================================")
             # Build GAN model from generator and discriminator
             gan_model = build_gan(generator, discriminator)
-            train(generator, discriminator, gan_model, dataset, noise_dimension, num_epochs, batch_size, display_frequency, verbose)
+            train(generator, discriminator, gan_model, dataset, noise_dimension, num_epochs, batch_size, display_frequency, verbose, fid_frequency)
             print("====================================================================================================")
             print("Training of the GAN model on the dataset is completed")
             print("====================================================================================================")
@@ -69,8 +70,7 @@ def train_or_load():
             else:
                 print("Invalid input. Please try again.")
         elif ((train_model=="N") or (train_model=="n")):
-            # Preprocessing and loading dataset
-            dataset = load_and_preprocess_dataset()
+            dataset = load_and_preprocess_dataset(load_limit=50000)
             # Build or restore generator model
             noise_dimension = 100
             generator = make_or_restore_model_generator(noise_dimension)
@@ -80,6 +80,13 @@ def train_or_load():
             time.sleep(5)
             print("====================================================================================================")
             print("Model is loaded successfully")
+            print("====================================================================================================")
+            fid_history = []
+            real_images_fid, real_labels_fid = generate_real_samples(dataset, 1000)
+            generated_images_fid, generated_label_fid = generate_fake_samples(generator, noise_dimension, len(real_images_fid))
+            fid_value = calculate_fid(real_images_fid, generated_images_fid)
+            fid_history.append(fid_value)
+            print(f"FID at last checkpoint: {fid_value}")
             print("====================================================================================================")
             return generator
         else:

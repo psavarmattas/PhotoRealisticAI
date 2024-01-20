@@ -3,10 +3,11 @@ from utils.data_generation import *
 from utils.visualization import *
 from utils.image_plotting import *
 from utils.metric_plotting import *
+from utils.calculate_fid import *
 import time
 
 def train(generator_model, discriminator_model, gan_model, dataset, noise_dimension,
-            num_epochs, batch_size, display_frequency, verbose):
+            num_epochs, batch_size, display_frequency, verbose, fid_frequency):
 
     """
     Train the GAN model on the given dataset.
@@ -21,6 +22,7 @@ def train(generator_model, discriminator_model, gan_model, dataset, noise_dimens
         batch_size (int): Batch size for training.
         display_frequency (int): Frequency to display generated images.
         verbose (bool): If True, print training details for each batch.
+        fid_frequency (int): Frequency to calculate FID.
 
     Returns:
         None
@@ -36,6 +38,7 @@ def train(generator_model, discriminator_model, gan_model, dataset, noise_dimens
     discriminator_loss_history = []
     discriminator_accuracy_history = []
     generator_loss_history = []
+    fid_history = []
     
     # Create an empty list to store generated images for each epoch
     saved_images_for_epochs = []
@@ -92,6 +95,15 @@ def train(generator_model, discriminator_model, gan_model, dataset, noise_dimens
             discriminator_loss_history.append(dsr_loss)
             discriminator_accuracy_history.append(100 * dsr_acc)
             generator_loss_history.append(gen_loss)
+            
+        if epoch % fid_frequency == 0:
+            real_images_fid, real_labels_fid = generate_real_samples(dataset, 1000)
+            generated_images_fid, generated_label_fid = generate_fake_samples(generator_model, noise_dimension, len(real_images_fid))
+            fid_value = calculate_fid(real_images_fid, generated_images_fid)
+            fid_history.append(fid_value)
+            print("====================================================================================================")
+            print(f"FID at Epoch {epoch+1}: {fid_value}")
+            print("====================================================================================================")
         
         # Log Epoch count
         logEpoch=f"{epoch+1}"
