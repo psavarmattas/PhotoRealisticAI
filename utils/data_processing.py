@@ -24,8 +24,8 @@ def load_and_preprocess_image(image_path, target_size=(128,128)):
     image = tf.io.read_file(image_path)
     image = tf.image.decode_jpeg(image, channels=3)
     image = tf.image.crop_to_bounding_box(image, 20, 0, 178, 178)  # Crop 20 pixels from top
-    image = tf.image.resize(image, target_size)
-    image = (image / 127.5) - 1.0  # Normalize to the range [-1, 1]
+    # image = tf.image.resize(image, target_size)
+    # image = (image / 127.5) - 1.0  # Normalize to the range [-1, 1]
     return image
 
 def load_and_preprocess_dataset(load_limit):

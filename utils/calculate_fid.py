@@ -53,11 +53,11 @@ def calculate_fid(real_images, generated_images):
         return term1 + term2
 
     # Load InceptionV3 model for feature extraction
-    inception_model = InceptionV3(include_top=False, pooling='avg', input_shape=(299, 299, 3))
+    inception_model = InceptionV3(include_top=False, weights="imagenet", pooling='avg', input_shape=(178, 178, 3))
     
     # Resize images to match InceptionV3 input size
-    real_images_resized = np.array([resize(img, (299, 299, 3), mode='reflect', anti_aliasing=True) for img in real_images])
-    generated_images_resized = np.array([resize(img, (299, 299, 3), mode='reflect', anti_aliasing=True) for img in generated_images])
+    real_images_resized = np.array([resize(img, (178, 178, 3), mode='reflect', anti_aliasing=True) for img in real_images])
+    generated_images_resized = np.array([resize(img, (178, 178, 3), mode='reflect', anti_aliasing=True) for img in generated_images])
 
     # Preprocess images for InceptionV3
     real_images_preprocessed = preprocess_input(real_images_resized)
