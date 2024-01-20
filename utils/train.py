@@ -5,7 +5,7 @@ from utils.image_plotting import *
 from utils.metric_plotting import *
 from utils.calculate_fid import *
 from utils.cooldown_gpu import *
-import time
+import time, sys
 
 def train(generator_model, discriminator_model, gan_model, dataset, noise_dimension,
             num_epochs, batch_size, display_frequency, verbose, fid_frequency):
@@ -99,7 +99,17 @@ def train(generator_model, discriminator_model, gan_model, dataset, noise_dimens
             discriminator_loss_history.append(dsr_loss)
             discriminator_accuracy_history.append(100 * dsr_acc)
             generator_loss_history.append(gen_loss)
-        
+
+            if (dsr_loss >= 10.0) | (gen_loss >= 10.0):
+                print("====================================================================================================")
+                print("Loss is too high! Training is stopped.")
+                print("\nNOTE: Please delete the last checkpoint file & write the name of the previous checkpoint .index \
+                        file to the checkpoint file in the generator & discriminator checkpoint folders.")
+                print("====================================================================================================")
+                sys.exit(1)
+            else:
+                continue
+
         # Log Epoch count
         logEpoch=f"{epoch+1}"
 
@@ -117,11 +127,11 @@ def train(generator_model, discriminator_model, gan_model, dataset, noise_dimens
         
         # Display generated images at the specified frequency
         if epoch % display_frequency == 0:
-            generated_images_for_epoch = generate_images(epoch+1, generator_model)
+            generated_images_for_epoch = generate_images(epoch, generator_model)
             saved_images_for_epochs.append(generated_images_for_epoch)
 
             # Plot generated images to visualize the progress of the generator
-            plot_generated_images(epoch+1, generator_model)
+            plot_generated_images(epoch, generator_model)
 
             # Plot the training metrics
             plot_training_metrics(discriminator_loss_history, discriminator_accuracy_history, generator_loss_history, epoch+1)
