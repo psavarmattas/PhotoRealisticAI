@@ -18,6 +18,10 @@ def creating_dirs():
     Returns:
     None
     """
+    
+    print("====================================================================================================")
+    print("Creating directories for storing checkpoints, plots, figures, and metrics...")
+    print("====================================================================================================")
 
     # Prepare a directory to store all the checkpoints.
 
