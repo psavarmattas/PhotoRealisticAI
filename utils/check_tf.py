@@ -13,7 +13,7 @@ def check_tf():
     """
 
     print("====================================================================================================")
-    print("Check if Tensorflow is installed & CPUs & GPUs are available")
+    print("Checking if Tensorflow is installed & find the CPUs & GPUs that are available...")
     print("====================================================================================================")
 
     print("Tensorflow Version Available: ", tf.version.VERSION)
