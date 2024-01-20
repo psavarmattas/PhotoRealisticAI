@@ -84,6 +84,14 @@ def log_to_file(logText, metricLog):
                 pass
         else:
             with open(file_path, "a") as file:
-                file.write("\n" + logText)        
+                file.write("\n" + logText)
+    elif metricLog == 4:
+        file_path = os.path.join(out_dir, 'logFID.txt')
+        if not os.path.isfile(file_path):
+            with open(file_path, 'w') as file:
+                pass
+        else:
+            with open(file_path, "a") as file:
+                file.write("\n" + logText)          
     else:
         print("Invalid Metric Log")
