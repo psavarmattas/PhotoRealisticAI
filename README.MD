@@ -67,6 +67,87 @@ The frontend code for the project is located in the `frontend` folder. Please re
 
 The frontend code for the project is located in the `frontend` folder. Please refer to the [README](https://github.com/psavarmattas/PhotoRealisticAI/blob/cdde4513cb6ec45b8c0576c61a2aafc23426be33/frontend/README.MD) in that folder for instructions on how to start the web dashboard.
 
+## Project Structure
+
+Please go through the project structure to understand the working of the project.
+
+```css
+PhotoRealisticAI/
+│
+├── backend/
+│   ├── utils/
+│   │   ├── generator_loader.py
+│   ├── generate_images_api.py
+│   └── README.MD
+│
+├── ckpt/
+│   ├── discriminator/
+│   └── generator/
+│
+├── dataset/
+│   └── celebA_dataset/
+│
+├── fig/
+│
+├── frontend/
+│   ├── README.MD
+│   ├── photorealistic-ai-frontend/
+│   │   ├── node_modules/
+│   │   ├── src/
+│   │   │   ├── app/
+│   │   │   │   ├── app.component.css
+│   │   │   │   ├── app.component.html
+│   │   │   │   ├── app.component.spec.ts
+│   │   │   │   ├── app.component.ts
+│   │   │   ├── assets/
+│   │   ├── .editorconfig
+│   │   ├── .gitignore
+│   │   ├── angular.json
+│   │   ├── package-lock.json
+│   │   ├── package.json
+│   │   ├── server.ts
+│   │   ├── tsconfig.app.json
+│   │   ├── tsconfig.json
+│   │   ├── tsconfig.spec.json
+│   │   ├── index.html
+│   │   ├── main.server.ts
+│   │   ├── main.ts
+│   │   ├── styles.css
+│   │   └── favicon.ico
+│
+├── models/
+│   ├── discriminator.py
+│   ├── gan.py
+│   ├── generator.py
+│
+├── plot/
+│
+├── utils/
+│   ├── calculate_fid.py
+│   ├── check_dependencies.py
+│   ├── check_tf.py
+│   ├── cooldown_gpu.py
+│   ├── data_generation.py
+│   ├── data_processing.py
+│   ├── file_operations.py
+│   ├── image_plotting.py
+│   ├── metric_plotting.py
+│   ├── model_operations.py
+│   ├── run_servers.py
+│   ├── train_load_finish.py
+│   ├── train.py
+│   └── visualization.py
+│
+├── .gitignore
+├── LICENSE.MD
+├── main.py
+├── README.MD
+├── requirements.txt
+├── run.py
+└── start_servers.sh
+```
+
+
 ## [License](https://github.com/psavarmattas/PhotoRealisticAI/blob/main/LICENSE.MD)
 
 Please make sure you read the license before using the code.
