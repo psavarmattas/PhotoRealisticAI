@@ -1,4 +1,4 @@
-# Backend API README
+# PhotoRealistic AI API README
 
 `Please note this project is still under development and the README & the code are still being updated.`
 

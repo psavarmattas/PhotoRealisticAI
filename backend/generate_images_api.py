@@ -8,10 +8,14 @@ import sys
 # Add the project root to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from utils.model_operations import make_or_restore_model_generator
+from utils.generator_loader import generator_loader
 from utils.visualization import generateNewImageFromAI
 
 app = Flask(__name__)
+
+# Generate the image
+noise_dimension = 100
+generator = generator_loader(noise_dimension)
 
 @app.route('/generate_image', methods=['GET'])
 def api_generate_image():
@@ -21,9 +25,6 @@ def api_generate_image():
     Returns:
     - flask.Response: The image response.
     """
-    # Generate the image
-    noise_dimension = 100
-    generator = make_or_restore_model_generator(noise_dimension)
 
     generated_image = generateNewImageFromAI(generator)
 
