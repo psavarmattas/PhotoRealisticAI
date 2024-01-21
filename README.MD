@@ -95,10 +95,13 @@ PhotoRealisticAI/
 │   │   ├── node_modules/
 │   │   ├── src/
 │   │   │   ├── app/
-│   │   │   │   ├── app.component.css
+│   │   │   │   ├── app.component.scss
+│   │   │   │   ├── app.config.server.ts
 │   │   │   │   ├── app.component.html
 │   │   │   │   ├── app.component.spec.ts
 │   │   │   │   ├── app.component.ts
+│   │   │   │   ├── app.config.ts
+│   │   │   │   ├── app.routes.ts
 │   │   │   ├── assets/
 │   │   ├── .editorconfig
 │   │   ├── .gitignore
@@ -112,7 +115,7 @@ PhotoRealisticAI/
 │   │   ├── index.html
 │   │   ├── main.server.ts
 │   │   ├── main.ts
-│   │   ├── styles.css
+│   │   ├── styles.scss
 │   │   └── favicon.ico
 │
 ├── models/
