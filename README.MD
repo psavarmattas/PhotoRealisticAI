@@ -120,6 +120,12 @@ PhotoRealisticAI/
 │   ├── gan.py
 │   ├── generator.py
 │
+├── out_metrics/
+│   ├── logEpoch.txt
+│   └── logFID.txt
+│   ├── logMetric.txt
+│   └── logVerbose.txt
+│
 ├── plot/
 │
 ├── utils/
