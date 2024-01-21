@@ -1,5 +1,10 @@
 import os
+import sys
 import tensorflow as tf
+
+# Add the project root to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from utils.file_operations import checkpoint_dir, generator_model_dir
 from models.generator import build_generator
 

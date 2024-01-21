@@ -46,6 +46,27 @@ The backend code for the project is located in the `backend` folder. Please refe
 
 The frontend code for the project is located in the `frontend` folder. Please refer to the [README](https://github.com/psavarmattas/PhotoRealisticAI/blob/cdde4513cb6ec45b8c0576c61a2aafc23426be33/frontend/README.MD) in that folder for instructions on how to start the web dashboard.
 
+## Project Instructions - Full Program (Backend + Frontend)
+
+1. Navigate to the root of the project
+
+    ```bash
+    cd ./PhotorealisticAI
+    ```
+
+2. Follow the [above instructions](https://github.com/psavarmattas/PhotoRealisticAI/tree/web-dashboard?tab=readme-ov-file#project-instructions---training) to install the dependencies and create a new environment
+
+3. Run the command:
+
+    ```bash
+    python run.py
+    ```
+
+4. Open your browser to `http://localhost:4200/` and generate new faces!
+
+
+The frontend code for the project is located in the `frontend` folder. Please refer to the [README](https://github.com/psavarmattas/PhotoRealisticAI/blob/cdde4513cb6ec45b8c0576c61a2aafc23426be33/frontend/README.MD) in that folder for instructions on how to start the web dashboard.
+
 ## [License](https://github.com/psavarmattas/PhotoRealisticAI/blob/main/LICENSE.MD)
 
 Please make sure you read the license before using the code.
