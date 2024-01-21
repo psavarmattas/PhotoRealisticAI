@@ -42,6 +42,10 @@ Due to resource constraints, we will be focusing on generating images at a lower
 
 The backend code for the project is located in the `backend` folder. Please refer to the [README](https://github.com/psavarmattas/PhotoRealisticAI/blob/web-dashboard/backend/README.MD) in that folder for instructions on how to use the API.
 
+## Project Instructions - Web Dashboard
+
+The frontend code for the project is located in the `frontend` folder. Please refer to the [README](https://github.com/psavarmattas/PhotoRealisticAI/blob/cdde4513cb6ec45b8c0576c61a2aafc23426be33/frontend/README.MD) in that folder for instructions on how to start the web dashboard.
+
 ## [License](https://github.com/psavarmattas/PhotoRealisticAI/blob/main/LICENSE.MD)
 
 Please make sure you read the license before using the code.
