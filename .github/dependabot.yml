@@ -10,16 +10,16 @@ updates:
     schedule:
       interval: "daily"
 
-  - package-ecosystem: "python"
+  - package-ecosystem: "pip"
     directory: "/"
     schedule:
       interval: "daily"
     labels:
       - "dependencies"
-  - package-ecosystem: pip
+  - package-ecosystem: "pip"
     directory: "/"
     schedule:
-      interval: daily
+      interval: "daily"
     groups:
       python-packages:
         patterns:
@@ -27,7 +27,7 @@ updates:
     labels:
       - "dependencies"
 
-  - package-ecosystem: "python"
+  - package-ecosystem: "pip"
     directory: "/backend"
     schedule:
       interval: "daily"
