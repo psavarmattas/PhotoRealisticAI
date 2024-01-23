@@ -11,16 +11,6 @@ updates:
       interval: "daily"
     labels:
       - "dependencies"
-  - package-ecosystem: "pip"
-    directory: "/"
-    schedule:
-      interval: "daily"
-    groups:
-      python-packages:
-        patterns:
-          - "*"
-    labels:
-      - "dependencies"
 
   - package-ecosystem: "pip"
     directory: "/backend"
