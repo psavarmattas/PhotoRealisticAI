@@ -75,9 +75,13 @@ Please go through the project structure to understand the working of the project
 PhotoRealisticAI/
 │
 ├── backend/
+│   ├── models/
+│   │   ├── generator.py
 │   ├── utils/
+│   │   ├── data_generation.py
 │   │   ├── generator_loader.py
-│   ├── generate_images_api.py
+│   │   ├── visualisation.py
+│   ├── main.py
 │   └── README.MD
 │
 ├── ckpt/

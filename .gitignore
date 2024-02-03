@@ -6,3 +6,4 @@ dataset/celebA_dataset/
 models/__pycache__
 utils/__pycache__
 backend/utils/__pycache__
+backend/models/__pycache__

@@ -1,17 +1,9 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
-from PIL import Image
 import base64
-import numpy as np
 from io import BytesIO
-import os
-import sys
-
-# Add the project root to the Python path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 from utils.generator_loader import generator_loader
-from utils.visualization import generateNewImageFromAI
+from utils.visualization import generateNewImageFromGeneratorAI
 
 app = Flask(__name__)
 CORS(app)  # Initialize CORS for your app
@@ -29,7 +21,7 @@ def api_generate_image():
     - flask.Response: The JSON response.
     """
     try:
-        generated_image = generateNewImageFromAI(generator)
+        generated_image = generateNewImageFromGeneratorAI(generator)
 
         # Convert the PIL Image to bytes
         image_bytes = BytesIO()

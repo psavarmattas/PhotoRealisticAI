@@ -17,7 +17,7 @@ trap cleanup INT
 
 # Start the backend API
 echo "Starting backend API..."
-python backend/generate_images_api.py &
+python backend/main.py &
 # Capture the process ID (PID) of the backend API command
 backend_pid=$!
 
