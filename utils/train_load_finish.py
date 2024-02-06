@@ -3,11 +3,10 @@ warnings.filterwarnings('ignore')
 
 import time
 import sys
-from utils.data_processing import *
-from utils.model_operations import *
-from models.gan import *
-from utils.train import *
-from utils.check_tf import *
+from utils.data_processing import load_and_preprocess_dataset
+from utils.model_operations import make_or_restore_model_discriminator, make_or_restore_model_generator
+from models.gan import build_gan
+from utils.train import train, generate_real_samples, calculate_fid, generate_fake_samples
 
 def train_or_load():
 

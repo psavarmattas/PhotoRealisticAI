@@ -1,4 +1,4 @@
-from utils.data_generation import *
+from utils.data_generation import generate_noise_samples
 from matplotlib import pyplot as plt
 from PIL import Image
 import numpy as np
