@@ -1,5 +1,6 @@
 from keras.optimizers import Adam
 from keras.models import Sequential
+from utils.multi_GPU import strategy
 
 def build_gan(generator, discriminator):
 
@@ -29,21 +30,40 @@ def build_gan(generator, discriminator):
     - Adjust the learning_rate and beta_1 parameters in the Adam optimizer based on your requirements.
     """
 
-    # Setting discriminator as non-trainable, so its weights won't update when training the GAN
-    discriminator.trainable = False
+    if strategy is not None:
+        with strategy.scope():
+            # Setting discriminator as non-trainable, so its weights won't update when training the GAN
+            discriminator.trainable = False
 
-    # Creating the GAN model
-    model = Sequential()
-        
-    # Adding the generator
-    model.add(generator)
-        
-    # Adding the discriminator
-    model.add(discriminator)
+            # Creating the GAN model
+            model = Sequential()
+                
+            # Adding the generator
+            model.add(generator)
+                
+            # Adding the discriminator
+            model.add(discriminator)
 
-    # Compiling the GAN model
-    optimizer = Adam(learning_rate=0.0002, beta_1=0.5)
+            # Compiling the GAN model
+            optimizer = Adam(learning_rate=0.0002, beta_1=0.5)
 
-    model.compile(loss='binary_crossentropy', optimizer=optimizer, metrics=['accuracy'])
+            model.compile(loss='binary_crossentropy', optimizer=optimizer, metrics=['accuracy'])
+    else:
+        # Setting discriminator as non-trainable, so its weights won't update when training the GAN
+        discriminator.trainable = False
+
+        # Creating the GAN model
+        model = Sequential()
+            
+        # Adding the generator
+        model.add(generator)
+            
+        # Adding the discriminator
+        model.add(discriminator)
+
+        # Compiling the GAN model
+        optimizer = Adam(learning_rate=0.0002, beta_1=0.5)
+
+        model.compile(loss='binary_crossentropy', optimizer=optimizer, metrics=['accuracy'])
 
     return model

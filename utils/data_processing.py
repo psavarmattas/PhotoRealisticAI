@@ -3,6 +3,7 @@ import glob
 import os
 from tqdm import tqdm
 import numpy as np
+from utils.multi_GPU import strategy
 
 # Define a function to load and preprocess images
 def load_and_preprocess_image(image_path, target_size=(128,128)):
@@ -41,32 +42,69 @@ def load_and_preprocess_dataset(load_limit):
         np.ndarray: The preprocessed dataset as a NumPy array.
     """
 
-    # Define the directory of your images
-    dataset_dir = "./dataset/celebA_dataset"
+    if strategy is not None:
 
-    # Get a list of all image paths in the directory
-    image_paths = glob.glob(os.path.join(dataset_dir, '*.jpg'))
+        tf.data.experimental.DistributeOptions()
+        options = tf.data.Options()
+        options.experimental_distribute.auto_shard_policy = tf.data.experimental.AutoShardPolicy.AUTO
 
-    # Limit the number of images
-    image_paths = image_paths[:load_limit]
+        # Define the directory of your images
+        dataset_dir = "./dataset/celebA_dataset"
 
-    # Create a TensorFlow dataset using tf.data
-    image_paths_dataset = tf.data.Dataset.from_tensor_slices(image_paths)
+        # Get a list of all image paths in the directory
+        image_paths = glob.glob(os.path.join(dataset_dir, '*.jpg'))
 
-    # Use tqdm to show progress while loading and preprocessing images
-    image_dataset = image_paths_dataset.map(
-        load_and_preprocess_image,
-        num_parallel_calls=tf.data.AUTOTUNE,
-        deterministic=False
-    )
+        # Limit the number of images
+        image_paths = image_paths[:load_limit]
 
-    # Convert the dataset to a numpy array
-    dataset = np.array(list(tqdm(image_dataset.as_numpy_iterator(), total=len(image_paths))))
-    
-    print("====================================================================================================")
-    print("Dataset shape")
-    print("====================================================================================================")
-    # Print dataset shape
-    print(dataset.shape)
+        # Create a TensorFlow dataset using tf.data
+        image_paths_dataset = tf.data.Dataset.from_tensor_slices(image_paths)
+
+        # Use tqdm to show progress while loading and preprocessing images
+        image_dataset = image_paths_dataset.map(
+            load_and_preprocess_image,
+            num_parallel_calls=tf.data.AUTOTUNE,
+            deterministic=False
+        )
+
+        dataset = image_dataset.with_options(options)
+
+        with strategy.scope():
+            # Convert the dataset to a numpy array
+            dataset = np.array(list(tqdm(image_dataset.as_numpy_iterator(), total=len(image_paths))))
+        
+        print("====================================================================================================")
+        print("Dataset shape")
+        print("====================================================================================================")
+        # Print dataset shape
+        print(dataset.shape)
+    else:
+        # Define the directory of your images
+        dataset_dir = "./dataset/celebA_dataset"
+
+        # Get a list of all image paths in the directory
+        image_paths = glob.glob(os.path.join(dataset_dir, '*.jpg'))
+
+        # Limit the number of images
+        image_paths = image_paths[:load_limit]
+
+        # Create a TensorFlow dataset using tf.data
+        image_paths_dataset = tf.data.Dataset.from_tensor_slices(image_paths)
+
+        # Use tqdm to show progress while loading and preprocessing images
+        image_dataset = image_paths_dataset.map(
+            load_and_preprocess_image,
+            num_parallel_calls=tf.data.AUTOTUNE,
+            deterministic=False
+        )
+
+        # Convert the dataset to a numpy array
+        dataset = np.array(list(tqdm(image_dataset.as_numpy_iterator(), total=len(image_paths))))
+        
+        print("====================================================================================================")
+        print("Dataset shape")
+        print("====================================================================================================")
+        # Print dataset shape
+        print(dataset.shape)
 
     return dataset

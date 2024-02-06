@@ -80,7 +80,7 @@ PhotoRealisticAI/
 │   ├── utils/
 │   │   ├── data_generation.py
 │   │   ├── generator_loader.py
-│   │   ├── visualisation.py
+│   │   └──  visualisation.py
 │   ├── main.py
 │   └── README.MD
 │
@@ -105,8 +105,8 @@ PhotoRealisticAI/
 │   │   │   │   ├── app.component.spec.ts
 │   │   │   │   ├── app.component.ts
 │   │   │   │   ├── app.config.ts
-│   │   │   │   ├── app.routes.ts
-│   │   │   ├── assets/
+│   │   │   │   └── app.routes.ts
+│   │   │   └──  assets/
 │   │   ├── .editorconfig
 │   │   ├── .gitignore
 │   │   ├── angular.json
@@ -146,6 +146,7 @@ PhotoRealisticAI/
 │   ├── image_plotting.py
 │   ├── metric_plotting.py
 │   ├── model_operations.py
+│   ├── multi_GPU.py
 │   ├── run_servers.py
 │   ├── train_load_finish.py
 │   ├── train.py
