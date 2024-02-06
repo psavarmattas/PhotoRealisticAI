@@ -125,7 +125,7 @@ PhotoRealisticAI/
 ├── models/
 │   ├── discriminator.py
 │   ├── gan.py
-│   ├── generator.py
+│   └── generator.py
 │
 ├── out_metrics/
 │   ├── logEpoch.txt
