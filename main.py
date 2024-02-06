@@ -18,10 +18,10 @@ def main():
         None
     """
     # Check all dependencies
-    #check_dependencies()
+    check_dependencies()
 
     # Checking TensorFlow and its dependencies
-    #check_tf()
+    check_tf()
     
     # Asking user to select multi GPU or single GPU
     multi_GPU_trainer()
