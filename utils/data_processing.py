@@ -43,35 +43,40 @@ def load_and_preprocess_dataset(load_limit):
     """
 
     if strategy is not None:
+        if not os.path.exists('./dataset/preprocessed_dataset.npy'):
+            tf.data.experimental.DistributeOptions()
+            options = tf.data.Options()
+            options.experimental_distribute.auto_shard_policy = tf.data.experimental.AutoShardPolicy.AUTO
 
-        tf.data.experimental.DistributeOptions()
-        options = tf.data.Options()
-        options.experimental_distribute.auto_shard_policy = tf.data.experimental.AutoShardPolicy.AUTO
+            # Define the directory of your images
+            dataset_dir = "./dataset/celebA_dataset"
 
-        # Define the directory of your images
-        dataset_dir = "./dataset/celebA_dataset"
+            # Get a list of all image paths in the directory
+            image_paths = glob.glob(os.path.join(dataset_dir, '*.jpg'))
 
-        # Get a list of all image paths in the directory
-        image_paths = glob.glob(os.path.join(dataset_dir, '*.jpg'))
+            # Limit the number of images
+            image_paths = image_paths[:load_limit]
 
-        # Limit the number of images
-        image_paths = image_paths[:load_limit]
+            # Create a TensorFlow dataset using tf.data
+            image_paths_dataset = tf.data.Dataset.from_tensor_slices(image_paths)
 
-        # Create a TensorFlow dataset using tf.data
-        image_paths_dataset = tf.data.Dataset.from_tensor_slices(image_paths)
+            # Use tqdm to show progress while loading and preprocessing images
+            image_dataset = image_paths_dataset.map(
+                load_and_preprocess_image,
+                num_parallel_calls=tf.data.AUTOTUNE,
+                deterministic=False
+            )
 
-        # Use tqdm to show progress while loading and preprocessing images
-        image_dataset = image_paths_dataset.map(
-            load_and_preprocess_image,
-            num_parallel_calls=tf.data.AUTOTUNE,
-            deterministic=False
-        )
+            dataset = image_dataset.with_options(options)
 
-        dataset = image_dataset.with_options(options)
-
-        with strategy.scope():
-            # Convert the dataset to a numpy array
-            dataset = np.array(list(tqdm(image_dataset.as_numpy_iterator(), total=len(image_paths))))
+            with strategy.scope():
+                # Convert the dataset to a numpy array
+                dataset = np.array(list(tqdm(image_dataset.as_numpy_iterator(), total=len(image_paths))))
+                np.save('./dataset/preprocessed_dataset.npy', dataset)
+                np.load('./dataset/preprocessed_dataset.npy')
+        else:
+            with strategy.scope():
+                np.load('./dataset/preprocessed_dataset.npy')
         
         print("====================================================================================================")
         print("Dataset shape")
@@ -79,28 +84,33 @@ def load_and_preprocess_dataset(load_limit):
         # Print dataset shape
         print(dataset.shape)
     else:
-        # Define the directory of your images
-        dataset_dir = "./dataset/celebA_dataset"
+        if not os.path.exists('./dataset/preprocessed_dataset.npy'):
+            # Define the directory of your images
+            dataset_dir = "./dataset/celebA_dataset"
 
-        # Get a list of all image paths in the directory
-        image_paths = glob.glob(os.path.join(dataset_dir, '*.jpg'))
+            # Get a list of all image paths in the directory
+            image_paths = glob.glob(os.path.join(dataset_dir, '*.jpg'))
 
-        # Limit the number of images
-        image_paths = image_paths[:load_limit]
+            # Limit the number of images
+            image_paths = image_paths[:load_limit]
 
-        # Create a TensorFlow dataset using tf.data
-        image_paths_dataset = tf.data.Dataset.from_tensor_slices(image_paths)
+            # Create a TensorFlow dataset using tf.data
+            image_paths_dataset = tf.data.Dataset.from_tensor_slices(image_paths)
 
-        # Use tqdm to show progress while loading and preprocessing images
-        image_dataset = image_paths_dataset.map(
-            load_and_preprocess_image,
-            num_parallel_calls=tf.data.AUTOTUNE,
-            deterministic=False
-        )
+            # Use tqdm to show progress while loading and preprocessing images
+            image_dataset = image_paths_dataset.map(
+                load_and_preprocess_image,
+                num_parallel_calls=tf.data.AUTOTUNE,
+                deterministic=False
+            )
 
-        # Convert the dataset to a numpy array
-        dataset = np.array(list(tqdm(image_dataset.as_numpy_iterator(), total=len(image_paths))))
-        
+            # Convert the dataset to a numpy array
+            dataset = np.array(list(tqdm(image_dataset.as_numpy_iterator(), total=len(image_paths))))
+            np.save('./dataset/preprocessed_dataset.npy', dataset)
+            dataset = np.load('./dataset/preprocessed_dataset.npy')
+        else:
+            dataset = np.load('./dataset/preprocessed_dataset.npy')
+
         print("====================================================================================================")
         print("Dataset shape")
         print("====================================================================================================")
