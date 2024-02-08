@@ -58,11 +58,74 @@ def train(generator_model, discriminator_model, gan_model, dataset, noise_dimens
     
     # Loop over all epochs
     for epoch in range(num_epochs):
-        # Record start time for the epoch
-        epoch_start_time = time.time()
-
+        train_step(generator_model, discriminator_model, gan_model, dataset, noise_dimension, 
+                    epoch, batches_per_epoch, half_batch_size, batch_size, verbose,
+                    discriminator_loss_history, discriminator_accuracy_history, generator_loss_history)
+        
+        # Save models after every epoch
         save_discriminator_checkpoint(discriminator_model, epoch)
         save_generator_checkpoint(generator_model, epoch)
+        
+        # Display generated images at the specified frequency
+        if epoch % display_frequency == 0:
+            generated_images_for_epoch = generate_images(epoch, generator_model)
+            saved_images_for_epochs.append(generated_images_for_epoch)
+
+            # Plot generated images to visualize the progress of the generator
+            plot_generated_images(epoch, generator_model)
+
+            # Plot the training metrics
+            plot_training_metrics(discriminator_loss_history, discriminator_accuracy_history, generator_loss_history, epoch+1)
+            # resetting lists to store metrics for plotting for next batch
+            discriminator_loss_history = []
+            discriminator_accuracy_history = []
+            generator_loss_history = []
+
+        if epoch % fid_frequency == 0:
+            real_images_fid, real_labels_fid = generate_real_samples(dataset, 1000)
+            generated_images_fid, generated_label_fid = generate_fake_samples(generator_model, noise_dimension, len(real_images_fid))
+            fid_value = calculate_fid(real_images_fid, generated_images_fid)
+            fid_history.append(fid_value)
+            print(f"FID at Epoch {epoch+1}: {fid_value}")
+            logText=f"FID at Epoch {epoch+1}: {fid_value}"
+            log_to_file(logText, 4)
+            plot_fid_score(fid_history, epoch+1)
+            print("====================================================================================================")
+
+        time.sleep(10)
+
+        # Cooldown after every 5 epochs for 5 minutes
+        if (epoch + 1) % 5 == 0:  # Cooldown after every 5 epochs
+            cooldown(cooldown_duration_minutes)
+
+    saved_images_for_epochs = saved_images
+
+def train_step(generator_model, discriminator_model, gan_model, dataset, noise_dimension,
+                epoch, batches_per_epoch, half_batch_size,  batch_size, verbose,
+                discriminator_loss_history, discriminator_accuracy_history, generator_loss_history):
+        """
+        Perform a single training step within an epoch.
+
+        Args:
+            generator_model (tf.keras.Model): The generator model.
+            discriminator_model (tf.keras.Model): The discriminator model.
+            gan_model (tf.keras.Model): The GAN model.
+            dataset (numpy.ndarray): The dataset for training.
+            noise_dimension (int): The dimension of the noise input.
+            epoch (int): The current epoch.
+            batches_per_epoch (int): The number of batches per epoch.
+            half_batch_size (int): Half the size of a batch.
+            batch_size (int): The batch size for training.
+            verbose (bool): If True, print training details for each batch.
+            discriminator_loss_history (list): List to store discriminator loss.
+            discriminator_accuracy_history (list): List to store discriminator accuracy.
+            generator_loss_history (list): List to store generator loss.
+
+        Returns:
+            None
+        """
+        # Record start time for the epoch
+        epoch_start_time = time.time()
         
         # Loop over all batches within this epoch
         for batch_num in range(batches_per_epoch):
@@ -125,38 +188,3 @@ def train(generator_model, discriminator_model, gan_model, dataset, noise_dimens
         print("====================================================================================================")
         print(f"Epoch {epoch+1} took {int(hours):02}:{int(minutes):02}:{seconds:.2f}")
         print("====================================================================================================")
-        
-        # Display generated images at the specified frequency
-        if epoch % display_frequency == 0:
-            generated_images_for_epoch = generate_images(epoch, generator_model)
-            saved_images_for_epochs.append(generated_images_for_epoch)
-
-            # Plot generated images to visualize the progress of the generator
-            plot_generated_images(epoch, generator_model)
-
-            # Plot the training metrics
-            plot_training_metrics(discriminator_loss_history, discriminator_accuracy_history, generator_loss_history, epoch+1)
-            # resetting lists to store metrics for plotting for next batch
-            discriminator_loss_history = []
-            discriminator_accuracy_history = []
-            generator_loss_history = []
-
-        if epoch % fid_frequency == 0:
-            real_images_fid, real_labels_fid = generate_real_samples(dataset, 1000)
-            generated_images_fid, generated_label_fid = generate_fake_samples(generator_model, noise_dimension, len(real_images_fid))
-            fid_value = calculate_fid(real_images_fid, generated_images_fid)
-            fid_history.append(fid_value)
-            print(f"FID at Epoch {epoch+1}: {fid_value}")
-            logText=f"FID at Epoch {epoch+1}: {fid_value}"
-            log_to_file(logText, 4)
-            plot_fid_score(fid_history, epoch+1)
-            print("====================================================================================================")
-
-        time.sleep(10)
-
-        # Cooldown after every 5 epochs for 5 minutes
-        if (epoch + 1) % 5 == 0:  # Cooldown after every 5 epochs
-            cooldown(cooldown_duration_minutes)
-
-    saved_images_for_epochs = saved_images
-
