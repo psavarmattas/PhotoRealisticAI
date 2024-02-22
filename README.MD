@@ -78,9 +78,9 @@ PhotoRealisticAI/
 │   ├── models/
 │   │   ├── generator.py
 │   ├── utils/
-│   │   ├── data_generation.py
+│   │   ├── data_generator.py
 │   │   ├── generator_loader.py
-│   │   └──  visualisation.py
+│   │   └──  visualizer.py
 │   ├── main.py
 │   └── README.MD
 │

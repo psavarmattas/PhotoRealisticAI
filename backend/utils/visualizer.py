@@ -1,6 +1,6 @@
 from PIL import Image
 import numpy as np
-from utils.data_generation import generateNoiseSamples
+from utils.data_generator import generateNoiseSamples
 
 def generateNewImageFromGeneratorAI(generator):
 

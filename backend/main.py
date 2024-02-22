@@ -3,7 +3,7 @@ from flask_cors import CORS
 import base64
 from io import BytesIO
 from utils.generator_loader import generator_loader
-from utils.visualization import generateNewImageFromGeneratorAI
+from utils.visualizer import generateNewImageFromGeneratorAI
 
 app = Flask(__name__)
 CORS(app)  # Initialize CORS for your app
