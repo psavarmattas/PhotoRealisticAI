@@ -2,7 +2,9 @@
 
 # Activate the Conda environment
 echo "Activating Conda environment..."
+source /opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh
 conda activate PhotoRealisticAI
+conda info | grep 'active environment'
 
 # Function to clean up processes on exit
 cleanup() {
