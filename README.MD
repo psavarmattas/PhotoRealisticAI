@@ -50,13 +50,13 @@ Due to resource constraints, we will be focusing on generating images at a lower
 
 ## Project Instructions - APIs
 
-The backend code for the project is located in the `backend` folder. Please refer to the [README](https://github.com/psavarmattas/PhotoRealisticAI/blob/web-dashboard/backend/README.MD) in that folder for instructions on how to use the API.
+The backend code for the project is located in the `backend` folder. Please refer to the [README](https://github.com/psavarmattas/PhotoRealisticAI/blob/main/backend/README.MD) in that folder for instructions on how to use the API.
 
 ## Project Instructions - Web Dashboard
 
-The frontend code for the project is located in the `frontend` folder. Please refer to the [README](https://github.com/psavarmattas/PhotoRealisticAI/blob/cdde4513cb6ec45b8c0576c61a2aafc23426be33/frontend/README.MD) in that folder for instructions on how to start the web dashboard.
+The frontend code for the project is located in the `frontend` folder. Please refer to the [README](https://github.com/psavarmattas/PhotoRealisticAI/blob/main/frontend/README.MD) in that folder for instructions on how to start the web dashboard.
 
-## Project Instructions - Full Program (Backend + Frontend)
+## Project Instructions - Running
 
 1. Navigate to the root of the project
 
@@ -64,7 +64,7 @@ The frontend code for the project is located in the `frontend` folder. Please re
     cd ./PhotorealisticAI
     ```
 
-2. Follow the [above instructions](https://github.com/psavarmattas/PhotoRealisticAI/tree/web-dashboard?tab=readme-ov-file#project-instructions---training) to install the dependencies and create a new environment
+2. Follow the [above instructions](https://github.com/psavarmattas/PhotoRealisticAI/tree/main?tab=readme-ov-file#project-instructions---training) to install the dependencies and create a new environment
 
 3. Run the command:
 
@@ -75,7 +75,7 @@ The frontend code for the project is located in the `frontend` folder. Please re
 4. Open your browser to `http://localhost:4200/` and generate new faces!
 
 
-The frontend code for the project is located in the `frontend` folder. Please refer to the [README](https://github.com/psavarmattas/PhotoRealisticAI/blob/cdde4513cb6ec45b8c0576c61a2aafc23426be33/frontend/README.MD) in that folder for instructions on how to start the web dashboard.
+The frontend code for the project is located in the `frontend` folder. Please refer to the [README](https://github.com/psavarmattas/PhotoRealisticAI/blob/main/frontend/README.MD) in that folder for instructions on how to start the web dashboard.
 
 ## Project Structure
 
