@@ -1,0 +1,21 @@
+<main class="main">
+  <div class="content">
+    <div class="header">
+      <h1 class="titleHeader">Welcome to {{ title }}</h1>
+      <p>
+        Welcome to Photorealistic AI, a cutting-edge project at the intersection
+        of artificial intelligence and visual realism. Our goal is to harness
+        the power of advanced AI algorithms to generate photorealistic images,
+        pushing the boundaries of what's possible in computer-generated
+        graphics. From lifelike landscapes to stunningly detailed characters,
+        our Photorealistic AI project brings virtual worlds closer to reality.
+      </p>
+    </div>
+    <div class="image">
+      <div class="generateImageContainer">
+        <p-button label="Load Image" (click)="loadImage()"></p-button>
+        <img *ngIf="imageSrc" [src]="imageSrc" alt="Generated Image" class="generatedImage" />
+      </div>
+    </div>
+  </div>
+</main>

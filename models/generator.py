@@ -1,6 +1,7 @@
 from keras.optimizers import Adam
 from keras.models import Sequential
 from keras.layers import Dense, Conv2D, Conv2DTranspose, LeakyReLU, Reshape
+from utils.multi_GPU import strategy
 
 def build_generator(latent_dim, channels=3):
 
@@ -30,36 +31,70 @@ def build_generator(latent_dim, channels=3):
     - The 'tanh' activation in the output layer scales the generated image pixel values to the range [-1, 1].
     """
 
-    model = Sequential()
-    
-    # Initial dense layer
-    model.add(Dense(32 * 32 * 128, input_dim=latent_dim))
-    model.add(LeakyReLU(0.2))
-    
-    # Reshape to (32, 32, 128) tensor for convolutional layers
-    model.add(Reshape((32, 32, 128)))
-    
-    # First deconvolutional layer
-    model.add(Conv2DTranspose(128, (4, 4), strides=(2, 2), padding='same'))
-    model.add(LeakyReLU(0.2))
-    
-    # Second deconvolutional layer
-    model.add(Conv2DTranspose(128, (4, 4), strides=(1, 1), padding='same'))
-    model.add(LeakyReLU(0.2))
-    
-    # Third deconvolutional layer
-    model.add(Conv2DTranspose(64, (4, 4), strides=(2, 2), padding='same'))
-    model.add(LeakyReLU(0.2))
-    
-    # Fourth deconvolutional layer
-    model.add(Conv2DTranspose(64, (4, 4), strides=(1, 1), padding='same'))
-    model.add(LeakyReLU(0.2))
-    
-    # Output convolutional layer with 'tanh' activation
-    model.add(Conv2D(channels, (8, 8), activation='tanh', padding='same'))
+    if strategy is not None:
+        with strategy.scope():
+            model = Sequential()
+            
+            # Initial dense layer
+            model.add(Dense(32 * 32 * 128, input_dim=latent_dim))
+            model.add(LeakyReLU(0.2))
+            
+            # Reshape to (32, 32, 128) tensor for convolutional layers
+            model.add(Reshape((32, 32, 128)))
+            
+            # First deconvolutional layer
+            model.add(Conv2DTranspose(128, (4, 4), strides=(2, 2), padding='same'))
+            model.add(LeakyReLU(0.2))
+            
+            # Second deconvolutional layer
+            model.add(Conv2DTranspose(128, (4, 4), strides=(1, 1), padding='same'))
+            model.add(LeakyReLU(0.2))
+            
+            # Third deconvolutional layer
+            model.add(Conv2DTranspose(64, (4, 4), strides=(2, 2), padding='same'))
+            model.add(LeakyReLU(0.2))
+            
+            # Fourth deconvolutional layer
+            model.add(Conv2DTranspose(64, (4, 4), strides=(1, 1), padding='same'))
+            model.add(LeakyReLU(0.2))
+            
+            # Output convolutional layer with 'tanh' activation
+            model.add(Conv2D(channels, (8, 8), activation='tanh', padding='same'))
 
-    optimizer = Adam(learning_rate=0.0002, beta_1=0.5)
+            optimizer = Adam(learning_rate=0.0002, beta_1=0.5)
 
-    model.compile(loss='binary_crossentropy', optimizer=optimizer)
+            model.compile(loss='binary_crossentropy', optimizer=optimizer)
+    else:
+        model = Sequential()
+        
+        # Initial dense layer
+        model.add(Dense(32 * 32 * 128, input_dim=latent_dim))
+        model.add(LeakyReLU(0.2))
+        
+        # Reshape to (32, 32, 128) tensor for convolutional layers
+        model.add(Reshape((32, 32, 128)))
+        
+        # First deconvolutional layer
+        model.add(Conv2DTranspose(128, (4, 4), strides=(2, 2), padding='same'))
+        model.add(LeakyReLU(0.2))
+        
+        # Second deconvolutional layer
+        model.add(Conv2DTranspose(128, (4, 4), strides=(1, 1), padding='same'))
+        model.add(LeakyReLU(0.2))
+        
+        # Third deconvolutional layer
+        model.add(Conv2DTranspose(64, (4, 4), strides=(2, 2), padding='same'))
+        model.add(LeakyReLU(0.2))
+        
+        # Fourth deconvolutional layer
+        model.add(Conv2DTranspose(64, (4, 4), strides=(1, 1), padding='same'))
+        model.add(LeakyReLU(0.2))
+        
+        # Output convolutional layer with 'tanh' activation
+        model.add(Conv2D(channels, (8, 8), activation='tanh', padding='same'))
+
+        optimizer = Adam(learning_rate=0.0002, beta_1=0.5)
+
+        model.compile(loss='binary_crossentropy', optimizer=optimizer)
 
     return model

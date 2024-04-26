@@ -1,5 +1,6 @@
 from matplotlib import pyplot as plt
-from utils.file_operations import *
+from utils.file_operations import out_dir
+import os
 
 def plot_training_metrics(discriminator_loss, discriminator_accuracy, generator_loss, epoch):
 

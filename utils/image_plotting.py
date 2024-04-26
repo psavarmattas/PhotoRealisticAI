@@ -1,6 +1,7 @@
-from utils.data_generation import *
-from utils.file_operations import *
+from utils.data_generation import generate_noise_samples
+from utils.file_operations import plot_dir
 from matplotlib import pyplot as plt
+import os
 
 def plot_generated_images(epoch, generator, num_samples=6, noise_dim=100, figsize=(15, 3)):
 

@@ -2,9 +2,9 @@ import os
 import numpy as np
 from datetime import datetime
 import tensorflow as tf
-from utils.file_operations import *
-from models.discriminator import *
-from models.generator import *
+from utils.file_operations import checkpoint_dir, discriminator_model_dir, generator_model_dir
+from models.discriminator import build_discriminator
+from models.generator import build_generator
 
 def make_or_restore_model_discriminator():
 
