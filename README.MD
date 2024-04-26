@@ -1,5 +1,7 @@
 # Photorealistic AI Model for Face Generation using DCGANS
 
+[![CodeQL](https://github.com/psavarmattas/PhotoRealisticAI/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/psavarmattas/PhotoRealisticAI/actions/workflows/github-code-scanning/codeql)
+
 ## Disclaimer
 
 This codebase is the product of research conducted for a Master's project by Puranjay Savar Mattas (@psavarmattas).
