@@ -1,6 +1,16 @@
 # Photorealistic AI Model for Face Generation using DCGANS
 
-`Please note this project is still under development and the README & the code are still being updated.`
+## Disclaimer
+
+This codebase is the product of research conducted for a Master's project by Puranjay Savar Mattas (@psavarmattas).
+
+- Citation: If you use this code in your own research, please cite it using the following format:
+```
+Puranjay Savar Mattas (2024). Photorealistic AI Model for Face Generation using DCGANS. GitHub repository, https://github.com/psavarmattas/PhotoRealisticAI
+```
+
+- License: This code is distributed under the MIT License, which you can find in the [License](https://github.com/psavarmattas/PhotoRealisticAI/blob/main/LICENSE.MD) file.
+- Trained Model: If you'd like to access the trained model for this project, you can contact Puranjay Savar Mattas at puranjaysavarmattas@gmail.com or by opening a pull request in this repository.
 
 ## Project Overview
 In this project, I have defined and trained a DCGAN on a dataset of faces. My goal was to get a generator network to generate new images of faces that look as realistic as possible! At the end of the project, I was able to visualize the results of my trained Generator to see how it performs; my generated samples look like fairly realistic faces with small amounts of noise.
