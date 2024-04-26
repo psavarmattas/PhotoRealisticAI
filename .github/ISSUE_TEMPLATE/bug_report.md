@@ -11,7 +11,7 @@ assignees: 'psavarmattas'
 Provide a clear and concise description of what the bug is.
 
 ## 📖 Library Version
-- **Commit Hash of the last pull commit: ** [e.g., 111db99fb3330179004e52c0eb70797a8490ed1d]
+- **Commit Hash of the last pull commit:** [e.g., 111db99fb3330179004e52c0eb70797a8490ed1d]
 
 ## 🚶 Steps to Reproduce
 Please follow these steps to reproduce the issue:
