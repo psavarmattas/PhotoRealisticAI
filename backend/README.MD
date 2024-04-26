@@ -51,7 +51,7 @@ The `generate_images_api.py` script defines a Flask web application with a singl
 
 - **Endpoint**: `/generate_image`
 - **Method**: GET
-- **Response**: Returns the generated image in PNG format.
+- **Response**: Returns the generated image in base64 format.
 
 ## Note
 Ensure that the GAN model is trained and saved before using the API. Refer to the main README for training instructions.
