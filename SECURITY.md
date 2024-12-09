@@ -1,6 +1,6 @@
 # Security Policy
 
-`Last Updated on 26th April 2024`
+`Last Updated on 09th December 2024`
 
 ## Reporting a Vulnerability
 If you discover a security vulnerability within the project, please follow these steps to responsibly disclose it:
